@@ -1,0 +1,8 @@
+https://github.com/devfullcycle/goexpert/blob/main/18-UOW/internal/entity/entity.go
+
+https://github.com/devfullcycle/goexpert/blob/main/20-CleanArch/internal/entity/order.go
+
+
+----
+netstat -ltnp | grep -w ':8080'
+
