@@ -15,16 +15,16 @@ func GetWeatherByZipcode(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := weather.GetWeatherByZipcode(zp)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		statusCode := http.StatusInternalServerError
 
 		if err.Error() == "zip code must be 8 numeric digits" {
-			w.WriteHeader(http.StatusUnprocessableEntity)
+			statusCode = http.StatusUnprocessableEntity
 		}
-
 		if err.Error() == "zip code not found" {
-			w.WriteHeader(http.StatusNotFound)
+			statusCode = http.StatusNotFound
 		}
 
+		w.WriteHeader(statusCode)
 		w.Write([]byte(err.Error()))
 		return
 	}
