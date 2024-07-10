@@ -47,6 +47,7 @@ func (r *WeatherApiRequest) Do() (*WeatherRespDTO, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	//log.Println(*resp)
 
@@ -54,6 +55,8 @@ func (r *WeatherApiRequest) Do() (*WeatherRespDTO, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	//log.Println(body)
 
 	var a WeatherRespDTO
 	err = json.Unmarshal(body, &a)

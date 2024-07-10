@@ -3,6 +3,7 @@ package webclient
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
 
@@ -12,6 +13,7 @@ import (
 type addressRespDTO struct {
 	Cep        string `json:"cep"`
 	Localidade string `json:"localidade"`
+	Erro       string `json:"erro"`
 }
 
 type ViacepRequest struct {
@@ -52,6 +54,10 @@ func (r *ViacepRequest) Do() (*addressRespDTO, error) {
 	err = json.Unmarshal(body, &a)
 	if err != nil {
 		return nil, err
+	}
+
+	if a.Erro == "true" {
+		return nil, errors.New("zip code not found")
 	}
 
 	return &a, nil

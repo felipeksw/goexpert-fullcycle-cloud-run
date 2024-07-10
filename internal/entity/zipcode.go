@@ -14,7 +14,7 @@ func (z *Zipcode) IsValid() error {
 	var re = regexp.MustCompile(`^[0-9]{8}$`)
 
 	if !re.MatchString(z.Zipcode) {
-		return errors.New("zip Code must be 8 numeric digits")
+		return errors.New("zip code must be 8 numeric digits")
 	}
 	return nil
 }
