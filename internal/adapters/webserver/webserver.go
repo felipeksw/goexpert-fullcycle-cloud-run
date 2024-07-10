@@ -30,7 +30,7 @@ func (s *WebServer) Start() {
 		mux.Handle(path, handler)
 	}
 
-	err := http.ListenAndServe(s.WebServerPort, mux)
+	err := http.ListenAndServe(":"+s.WebServerPort, mux)
 	if err != nil {
 		panic(err)
 	}

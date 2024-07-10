@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+	"os"
 )
 
 type WeatherRespDTO struct {
@@ -27,9 +28,7 @@ func NewWeatherRequest(location string) (*WeatherApiRequest, error) {
 		defer cancel()
 	*/
 
-	key := ""
-
-	req, err := http.NewRequestWithContext(context.Background(), http.MethodGet, "https://api.weatherapi.com/v1/current.json?key="+key+"&q="+location+"&aqi=no", nil)
+	req, err := http.NewRequestWithContext(context.Background(), http.MethodGet, "https://api.weatherapi.com/v1/current.json?key="+os.Getenv("WEATHERAPI_KEY")+"&q="+location+"&aqi=no", nil)
 	if err != nil {
 		return nil, err
 	}
