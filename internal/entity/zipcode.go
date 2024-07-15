@@ -2,33 +2,41 @@ package entity
 
 import (
 	"errors"
+	"log/slog"
 	"regexp"
 )
 
-type Zipcode struct {
-	Zipcode string
+type zipcodeEntity struct {
+	zipcode string
 }
 
-func (z *Zipcode) IsValid() error {
-
-	var re = regexp.MustCompile(`^[0-9]{8}$`)
-
-	if !re.MatchString(z.Zipcode) {
-		return errors.New("zip code must be 8 numeric digits")
-	}
-	return nil
+func (z *zipcodeEntity) Zipcode() string {
+	return z.zipcode
 }
 
-func NewZipcode(zipcode string) (*Zipcode, error) {
+func NewZipcode(zipcode string) (*zipcodeEntity, error) {
 
-	var zc = &Zipcode{
-		Zipcode: zipcode,
+	var zc = &zipcodeEntity{
+		zipcode: zipcode,
 	}
 
 	err := zc.IsValid()
 	if err != nil {
+		slog.Error("[invalid zipcode]", "error", err.Error())
 		return nil, err
 	}
 
-	return zc, nil
+	return &zipcodeEntity{
+		zipcode: zc.zipcode,
+	}, nil
+}
+
+func (z *zipcodeEntity) IsValid() error {
+
+	var re = regexp.MustCompile(`^[0-9]{8}$`)
+
+	if !re.MatchString(z.zipcode) {
+		return errors.New("zip code must be 8 numeric digits")
+	}
+	return nil
 }
