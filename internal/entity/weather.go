@@ -8,12 +8,9 @@ type CurrentWeather struct {
 
 func NewCurrentWeather(tempC float32) *CurrentWeather {
 
-	var tempF = tempC*1.8 + 32
-	var tempK = tempC + 273
-
 	return &CurrentWeather{
 		TempC: tempC,
-		TempF: tempF,
-		TempK: tempK,
+		TempF: tempC*1.8 + 32,
+		TempK: tempC + 273,
 	}
 }

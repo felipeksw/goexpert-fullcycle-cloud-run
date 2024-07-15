@@ -1,6 +1,11 @@
  # goexpert-fullcycle-cloud-run
 FullCycle - Pós Go Expert Labs - Deploy com Cloud Run
 
+## Entregáveis
+Chamada no Cloud Run: https://goexpert-fullcycle-cloud-run-orkjzsk3iq-uc.a.run.app/weather/zipcode/{CEP}
+
+
+## Requisitos
 Objetivo: Desenvolver um sistema em Go que receba um CEP, identifica a cidade e retorna o clima atual (temperatura em graus celsius, fahrenheit e kelvin). Esse sistema deverá ser publicado no Google Cloud Run.
 
 Requisitos:
