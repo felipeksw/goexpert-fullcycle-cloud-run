@@ -9,7 +9,7 @@ import (
 
 func FuzzNewCurrentWeather(f *testing.F) {
 
-	seed := []float32{-89, -20.05, 0, 15.17, 24.20, 58}
+	seed := []float32{-100, -89, -20.05, 0, 15.17, 24.20, 58, 100}
 	for _, temps := range seed {
 		f.Add(temps)
 	}

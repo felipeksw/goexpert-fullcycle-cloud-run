@@ -1,6 +1,7 @@
 package entity_test
 
 import (
+	"errors"
 	"testing"
 
 	"github.com/felipeksw/goexpert-fullcycle-cloud-run/internal/entity"
@@ -11,25 +12,27 @@ func TestNewZipcode(t *testing.T) {
 
 	type zipcodeLote struct {
 		zipcode string
-		err     string
+		err     error
 		status  bool
 	}
 
+	err8Digits := errors.New("zip code must be 8 numeric digits")
+
 	table := []zipcodeLote{
-		{"", "zip code must be 8 numeric digits", false},
-		{"1300000z", "zip code must be 8 numeric digits", false},
-		{"130000010", "zip code must be 8 numeric digits", false},
-		{"13000001012345678", "zip code must be 8 numeric digits", false},
-		{"#30000010", "zip code must be 8 numeric digits", false},
-		{"13000001$", "zip code must be 8 numeric digits", false},
-		{"^#3000001", "zip code must be 8 numeric digits", false},
-		{"'3000001", "zip code must be 8 numeric digits", false},
-		{"\"3000001", "zip code must be 8 numeric digits", false},
-		{"130000-010", "zip code must be 8 numeric digits", false},
-		{"ABCDEFGH", "zip code must be 8 numeric digits", false},
-		{"13000001", "", true},
-		{"00000000", "", true},
-		{"99999999", "", true},
+		{"", err8Digits, false},
+		{"1300000z", err8Digits, false},
+		{"130000010", err8Digits, false},
+		{"13000001012345678", err8Digits, false},
+		{"#30000010", err8Digits, false},
+		{"13000001$", err8Digits, false},
+		{"^#3000001", err8Digits, false},
+		{"'3000001", err8Digits, false},
+		{"\"3000001", err8Digits, false},
+		{"130000-010", err8Digits, false},
+		{"ABCDEFGH", err8Digits, false},
+		{"13000001", nil, true},
+		{"00000000", nil, true},
+		{"99999999", nil, true},
 	}
 	for _, item := range table {
 		zpEntity, err := entity.NewZipcode(item.zipcode)
