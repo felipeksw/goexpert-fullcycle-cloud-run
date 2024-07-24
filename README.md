@@ -2,8 +2,20 @@
 FullCycle - Pós Go Expert Labs - Deploy com Cloud Run
 
 ## Entregáveis
-Chamada no Cloud Run: https://goexpert-fullcycle-cloud-run-orkjzsk3iq-uc.a.run.app/weather/zipcode/{CEP}
-
+### Testes Locais
+1. Clone o repositório com o comando: `git clone https://github.com/felipeksw/goexpert-fullcycle-cloud-run`
+2. Para iniciar a aplicação, execute o comando na raiz do repositório: `docker-compose up -d`
+3. Para realizar uma chamda ao Serviço execute o comando:
+```sh
+curl --request GET \
+  --url http://{HOST}:8080/weather/zipcode/13015100
+```
+### Testes no Cloud Run
+1. Para realizar uma chamda ao Serviço no Cloud Run, execute o comando:
+```sh
+curl --request GET \
+  --url https://goexpert-fullcycle-cloud-run-orkjzsk3iq-uc.a.run.app/weather/zipcode/13015100
+```
 
 ## Requisitos
 Objetivo: Desenvolver um sistema em Go que receba um CEP, identifica a cidade e retorna o clima atual (temperatura em graus celsius, fahrenheit e kelvin). Esse sistema deverá ser publicado no Google Cloud Run.
