@@ -6,7 +6,7 @@ type WeatherDto struct {
 }
 
 type weatherCurrentDto struct {
-	TempC float32 `json:"temp_c"`
+	TempC float64 `json:"temp_c"`
 }
 
 type weatherLocationDto struct {

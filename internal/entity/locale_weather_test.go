@@ -14,7 +14,7 @@ func TestNewLocaleWeather(t *testing.T) {
 
 	type localeWeatherLote struct {
 		locale string
-		temp   float32
+		temp   float64
 		err    error
 	}
 	errTemp := errors.New("temperature is outside the earth range")

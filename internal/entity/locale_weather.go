@@ -3,6 +3,7 @@ package entity
 import (
 	"errors"
 	"log/slog"
+	"math"
 	"strings"
 
 	"github.com/felipeksw/goexpert-fullcycle-cloud-run/internal/dto"
@@ -10,12 +11,12 @@ import (
 
 type localWeatherEntity struct {
 	locale string
-	tempC  float32
-	tempF  float32
-	tempK  float32
+	tempC  float64
+	tempF  float64
+	tempK  float64
 }
 
-func (w *localWeatherEntity) TempC() float32 {
+func (w *localWeatherEntity) TempC() float64 {
 	return w.tempC
 }
 
@@ -23,7 +24,7 @@ func (w *localWeatherEntity) Locale() string {
 	return w.locale
 }
 
-func NewLocaleWeather(locale string, tempC float32) (*dto.LocalWeatherDto, error) {
+func NewLocaleWeather(locale string, tempC float64) (*dto.LocalWeatherDto, error) {
 
 	locale = strings.TrimSpace(locale)
 
@@ -43,9 +44,9 @@ func NewLocaleWeather(locale string, tempC float32) (*dto.LocalWeatherDto, error
 
 	return &dto.LocalWeatherDto{
 		Locale: tc.locale,
-		TempC:  tc.tempC,
-		TempF:  tc.tempC*1.8 + 32,
-		TempK:  tc.tempC + 273,
+		TempC:  math.Round((tc.tempC)*10) / 10,
+		TempF:  math.Round((tc.tempC*1.8+32)*10) / 10,
+		TempK:  math.Round((tc.tempC+273)*10) / 10,
 	}, nil
 }
 
