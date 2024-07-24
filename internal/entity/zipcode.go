@@ -4,17 +4,15 @@ import (
 	"errors"
 	"log/slog"
 	"regexp"
+
+	"github.com/felipeksw/goexpert-fullcycle-cloud-run/internal/dto"
 )
 
 type zipcodeEntity struct {
 	zipcode string
 }
 
-func (z *zipcodeEntity) Zipcode() string {
-	return z.zipcode
-}
-
-func NewZipcode(zipcode string) (*zipcodeEntity, error) {
+func NewZipcode(zipcode string) (*dto.ZipcodeDto, error) {
 
 	var zc = &zipcodeEntity{
 		zipcode: zipcode,
@@ -26,8 +24,8 @@ func NewZipcode(zipcode string) (*zipcodeEntity, error) {
 		return nil, err
 	}
 
-	return &zipcodeEntity{
-		zipcode: zc.zipcode,
+	return &dto.ZipcodeDto{
+		Zipcode: zc.zipcode,
 	}, nil
 }
 

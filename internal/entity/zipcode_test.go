@@ -35,10 +35,10 @@ func TestNewZipcode(t *testing.T) {
 		{"99999999", nil, true},
 	}
 	for _, item := range table {
-		zpEntity, err := entity.NewZipcode(item.zipcode)
+		zipcodeDto, err := entity.NewZipcode(item.zipcode)
 		if item.status {
 			assert.Nil(t, err)
-			assert.Equal(t, item.zipcode, zpEntity.Zipcode())
+			assert.Equal(t, item.zipcode, zipcodeDto.Zipcode)
 		} else {
 			assert.Error(t, err, item.err)
 		}
