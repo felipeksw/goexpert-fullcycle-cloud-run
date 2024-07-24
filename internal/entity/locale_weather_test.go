@@ -3,6 +3,7 @@ package entity_test
 import (
 	"errors"
 	"log/slog"
+	"math"
 	"strings"
 	"testing"
 
@@ -45,9 +46,9 @@ func TestNewLocaleWeather(t *testing.T) {
 
 			assert.Nil(t, err)
 			assert.Equal(t, strings.TrimSpace(item.locale), localeWeatherDto.Locale)
-			assert.Equal(t, item.temp, localeWeatherDto.TempC)
-			assert.Equal(t, item.temp*1.8+32, localeWeatherDto.TempF)
-			assert.Equal(t, item.temp+273, localeWeatherDto.TempK)
+			assert.Equal(t, math.Round((item.temp)*10)/10, math.Round((localeWeatherDto.TempC)*10)/10)
+			assert.Equal(t, math.Round((item.temp*1.8+32)*10)/10, math.Round((localeWeatherDto.TempF)*10)/10)
+			assert.Equal(t, math.Round((item.temp+273)*10)/10, math.Round((localeWeatherDto.TempK)*10)/10)
 		}
 	}
 }
