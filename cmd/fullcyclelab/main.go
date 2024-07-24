@@ -1,15 +1,19 @@
 package main
 
 import (
-	"os"
+	"log/slog"
 
-	"github.com/felipeksw/goexpert-fullcycle-cloud-run/internal/adapters/webserver"
+	"github.com/felipeksw/goexpert-fullcycle-cloud-run/internal/adapter/webserver"
 )
 
 func main() {
 
-	ws := webserver.NewWebServer(os.Getenv("WEB_SERVER_PORT"))
-	ws.AddHandler("GET /weather/zipcode/{zipcode}", webserver.GetWeatherByZipcode)
-	ws.Start()
+	slog.SetLogLoggerLevel(slog.LevelInfo)
 
+	ws := webserver.NewWebServer("8080")
+	ws.AddHandler("GET /weather/zipcode/{zipcode}", webserver.GetWeatherByZipcodeHandler)
+	err := ws.Start()
+	if err != nil {
+		slog.Error("could not start the webserver")
+	}
 }
