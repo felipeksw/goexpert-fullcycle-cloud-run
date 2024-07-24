@@ -1,7 +1,7 @@
 package dto
 
-type AddressResponseDto struct {
+type AddressDto struct {
 	Cep        string `json:"cep"`
 	Localidade string `json:"localidade"`
-	Erro       string `json:"erro"`
+	Error      string `json:"erro"`
 }
